@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using TpRestaurante.Models;
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .mySlides {
+            width: 100%;
+        }
+        iframe{
+            display:inline-block;
+            width:300px;
+            height:300px;
+            float:left;
+        }
+        .sucursal{
+            display:block;
+            width:100%;
+            margin-bottom:10px;
+            position:relative;
+        
+        }
+        .foto-bar{
+            height:300px;
+            width:auto;
+        }
+        .button{
+            text-align:center;
+            text-decoration:none;
+            color:#9bc1ff;
+            border:1px solid #9bc1ff;
+            transition: background 0.5s;
+            background-color:white;
+            display:block;
+            padding:5px;
+            margin-bottom:5px;
+
+            
+        }
+        .button:hover{
+            color:white;
+            background-color:#9bc1ff;
+            text-decoration:none;
+
+        }
+
+    </style>
+</head>
+
+<img class="mySlides" src="~/Content/img/img1.jpg">
+<img class="mySlides" src="~/Content/img/img2.jpg">
+<img class="mySlides" src="~/Content/img/img3.jpg">
+<script>
+    var slideIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) { slideIndex = 1 }
+        x[slideIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+<div>
+    <h2>Historia</h2>
+    <p style="padding:5px; font-size:25px;text-align:center;border:1px solid #000;background-color: rgba(0, 0, 0, .1);">"Desde 2001 sirviendo comida casera y las mejores hamburguesas. Prestando especial atención al servicio y poniendo dedicación en la preparación del café."</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="border:1px solid #000;">
+        <h2 style="text-align:center;">MENU</h2>
+        <p style="text-align:center;">Ingrese aquí para ver el menu!.</p>
+        <a class="button" href="@Url.Action("Menu","LaBirra")">Ir &raquo;</a>
+    </div>
+    <div class="col-md-4" style="border:1px solid #000;">
+        <h2 style="text-align:center;">Sucursales</h2>
+        <p style="text-align:center;">Lista de nuestras sucursales.</p>
+        <a class="button" href="@Url.Action("Sucursales","LaBirra")">Ir &raquo;</a>
+    </div>
+    <div class="col-md-4" style="border:1px solid #000;">
+        <h2 style="text-align:center;">Login</h2>
+        <p style="text-align:center;">Login Administrador</p>
+        <a class="button" href="@Url.Action("Login","LaBirra")">Ir &raquo;</a>
+    </div>
+</div>

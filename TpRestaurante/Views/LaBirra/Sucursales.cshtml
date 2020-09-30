@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Sucursales";
+}
+
+@using TpRestaurante.Models;
+
+<head>
+    <style>
+       /*iframe {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            float: left;
+        }*/
+
+        .sucursal {
+            display: inline-block;
+            width: 340px;
+            padding:10px;
+            position: relative;
+        }
+
+        .foto-bar {
+            height: auto;
+            width: 300px;
+        }
+         .button{
+            text-align:center;
+            text-decoration:none;
+            color:#9bc1ff;
+            border:1px solid #9bc1ff;
+            transition: background 0.5s;
+            background-color:white;
+            display:block;
+            padding:5px 0px 5px 0px;
+            width:300px;
+            margin-bottom:5px;    
+        }
+        .button:hover{
+            color:white;
+            background-color:#9bc1ff;
+            text-decoration:none;
+
+        }
+        .button:visited .button{
+            color:#9bc1ff;
+            text-decoration:none;
+        }
+          .button:visited .button:hover{
+            color:#fff;
+            text-decoration:none;
+        }
+        </style>
+</head>
+<h2>Sucursales</h2>
+
+
+@{
+    foreach (Sucursales Sucur in ViewBag.Sucursales)
+    {
+        <div class="sucursal">
+            <img class="foto-bar" src="~/Content/img/@Sucur.Imagen" alt="Alternate Text" style="margin-bottom:5px;" />
+            <a href="@Url.Action("VerMas","LaBirra", new { IdSucursal = Sucur.IdSucursal })" class="button">Ver mas &raquo;</a>
+        </div>
+    }
+}

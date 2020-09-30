@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Panel";
+}
+@using TpRestaurante.Models;
+
+
+<h2>Panel</h2>
+<head>
+    <script src="https://use.fontawesome.com/99ce9d282b.js"></script>
+    <style>
+        #caja-comentarios {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ddd;
+            background: #f1f1f1;
+            overflow-y: scroll;
+        }
+        .comentarios{
+            border: 1px solid #ddd;
+            width:100%;
+        }
+        .comentarios p{
+            margin-left:10px;
+        }
+    </style>
+</head>
+
+<a href="@Url.Action("CerrarSesion","LaBirra")">Cerrar Sesion</a>
+
+<a href="@Url.Action("AdmSucursales","LaBirra")">ABM Sucursales</a>
+<a href="@Url.Action("AdmMenu","LaBirra")">ABM Menú</a>
+
+
+
+<h2> Administrar Comentarios</h2>
+<div id="caja-comentarios">
+    @{
+        if (ViewBag.Comentarios.Count > 0)
+        {
+            foreach (Comentario Com in ViewBag.Comentarios)
+            {
+                <div class="comentarios">
+                    <p>@Com.Nom calificó: <i class="fa fa-star" aria-hidden="true"></i>@Com.calificacion | <a href="@Url.Action("Aprobar","LaBirra", new { IdComentario = Com.idcomentario, Aprobado = false })">Eliminar</a> |<a href="@Url.Action("Aprobar","LaBirra", new { IdComentario = Com.idcomentario, Aprobado = true })">Aprobar</a>  |</p>
+                    <p>@Com.com</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="text-align:center;padding:10px;">No hay comentarios</p>
+        }
+
+    }
+</div>
+

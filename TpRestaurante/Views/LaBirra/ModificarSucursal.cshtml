@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ModificarSucursal";
+}
+@using TpRestaurante.Models;
+
+@model Sucursales
+
+<h2>ModificarSucursal</h2>
+
+
+@using (Html.BeginForm("ModificarSucursal", "LaBirra", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.IdSucursal)
+    @Html.HiddenFor(x => x.Imagen)
+    @Html.Label("Mapa: ") @Html.TextBoxFor(x => x.Mapa) @Html.ValidationMessageFor(x => x.Mapa)  <br />
+    @Html.Label("Domicilio: ") @Html.TextBoxFor(x => x.Domicilio) @Html.ValidationMessageFor(x => x.Domicilio)  <br />
+    @Html.Label("Telefono: ") @Html.TextBoxFor(x => x.Telefono)@Html.ValidationMessageFor(x => x.Telefono)  <br />
+    @Html.Label("ImagenPrincipal: ") @Html.TextBoxFor(x => x.file, new { type = "file" })  <br />
+
+    <input type="submit" value="Enviar" />
+}

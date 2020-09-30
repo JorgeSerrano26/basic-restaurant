@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "AdmMenu";
+}
+
+<h2>AdmMenu</h2>
+<head>
+    <style>
+        /*iframe {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            float: left;
+        }*/
+
+        .sucursal {
+            display: inline-block;
+            width: 340px;
+            padding: 10px;
+            position: relative;
+        }
+
+        .foto-bar {
+            height: auto;
+            width: 300px;
+        }
+
+        .button {
+            text-align: center;
+            text-decoration: none;
+            color: #9bc1ff;
+            border: 1px solid #9bc1ff;
+            transition: background 0.5s;
+            background-color: white;
+            display: block;
+            padding: 5px 0px 5px 0px;
+            width: 300px;
+            margin-bottom: 5px;
+        }
+
+            .button:hover {
+                color: white;
+                background-color: #9bc1ff;
+                text-decoration: none;
+            }
+
+            .button:visited .button {
+                color: #9bc1ff;
+                text-decoration: none;
+            }
+
+                .button:visited .button:hover {
+                    color: #fff;
+                    text-decoration: none;
+                }
+    </style>
+    <style>
+        #cont-menu {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #contenedor {
+            width: 25%;
+            background: #000;
+            overflow: hidden;
+            height: 200px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        #imagen {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            -webkit-transition: height .4s;
+        }
+
+            #imagen .foto {
+                width: 100%;
+                height: auto;
+                -webkit-transition: height .4s;
+            }
+
+        .info {
+            padding: 10px;
+            width: 100%;
+            height: 0px;
+            background: #2c3f52;
+            -webkit-transition: height .4s;
+        }
+        /* HOVER */
+        #contenedor:hover #imagen {
+            height: 120px;
+        }
+
+        #contenedor:hover .info {
+            height: 80px;
+        }
+
+        #contenedor a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #titulo::after {
+            margin-left: auto;
+            margin-right: auto;
+            content: "";
+            display: block;
+            height: 3px;
+            background: #606468;
+            width: 40%;
+            min-width: 140px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+@using TpRestaurante.Models;
+
+@{
+    foreach (Menu Sucur in ViewBag.Sucursales)
+    {
+        <div class="sucursal">
+            <img class="foto-bar" src="~/Content/img/@Sucur.Imagen" alt="Alternate Text" style="margin-bottom:5px;" />
+            <a href="@Url.Action("VerMas","LaBirra", new { IdSucursal = Sucur.IdSucursal })" class="button">Ver Datos &raquo;</a>
+            <a href="@Url.Action("ModificarSucursal","LaBirra", new { IdSucursal = Sucur.IdSucursal })" class="button">Modificar &raquo;</a>
+            <a href="@Url.Action("EliminarSucursal","LaBirra", new { IdSucursal = Sucur.IdSucursal })" class="button">Eliminar &raquo;</a>
+        </div>
+    }
+}
+
+<div id="cont-menu">
+    @{
+        foreach (Menu List in ViewBag.ListaMenu)
+        {
+            <div id="contenedor">
+                <a id="imagen-link" href="~/Content/img/@List.Imagen">
+                    <div id="imagen"> <img class="foto" src="~/Content/img/@List.Imagen" alt="Alternate Text" /></div>
+                    <div class="info">
+                        <p style="font-size:20px;color:white;">@List.Nombre - $@List.Precio</p>
+                        <p style="color:white;">@List.TipoComida</p>
+                    </div>
+                </a>
+            </div>
+        }
+    }
+</div>

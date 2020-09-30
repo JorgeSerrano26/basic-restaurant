@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+@using TpRestaurante.Models;
+@model Usuario
+<h2>Login</h2>
+
+
+
+@using (Html.BeginForm("Login", "LaBirra", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.Noentro == "true")
+    {
+        <p style="color:red;">Los usuario y/o contraseña estan mal.</p>
+    }
+    @Html.Label("Usuario/Mail: ") @Html.TextBoxFor(x => x.user) @Html.ValidationMessageFor(x => x.user)  <br />
+    @Html.Label("Contraseña: ") @Html.PasswordFor(x => x.pass) @Html.ValidationMessageFor(x => x.pass)
+    <input type="submit" value="Enviar" />
+}
+

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "ModificarMenu";
+}
+
+<h2>ModificarMenu</h2>
+
+@using TpRestaurante.Models
+@model Menu
+
+
+
+@using (Html.BeginForm("ModificarMenu", "LaBirra", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(x => x.IdMenu)
+    @Html.HiddenFor(x => x.Imagen)
+    @Html.Label("Nombre: ") @Html.TextBoxFor(x => x.Nombre) @Html.ValidationMessageFor(x => x.Nombre)  <br />
+    @Html.Label("Precio: ") @Html.TextBoxFor(x => x.Precio) @Html.ValidationMessageFor(x => x.Precio)  <br />
+    @Html.Label("ImagenPrincipal: ") @Html.TextBoxFor(x => x.file, new { type = "file" })  <br />
+    <input type="submit" value="Enviar" />
+}

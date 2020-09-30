@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "VerMas";
+}
+@using TpRestaurante.Models;
+@model Comentario
+
+<head>
+    <script src="https://use.fontawesome.com/99ce9d282b.js"></script>
+    <style>
+        .sucursal {
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+
+        .foto-bar {
+            float: left;
+        }
+
+        .foto-bar, iframe {
+            width: 50%;
+        }
+
+        #info-sucursales {
+            width: 100%;
+            height: auto;
+        }
+
+        iframe {
+            height: 300px !important;
+        }
+
+        #info-sucursales {
+            display: inline-block;
+            border: 1px solid #CCC;
+            text-align: center;
+        }
+
+        #caja-comentarios {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ddd;
+            background: #f1f1f1;
+            overflow-y: scroll;
+        }
+        textarea{
+            height:100px;
+            width:100%;
+            overflow-y: scroll;
+        }
+        .comentarios{
+            border: 1px solid #ddd;
+            width:100%;
+        }
+        .comentarios p{
+            margin-left:10px;
+        }
+    </style>
+</head>
+
+@{
+    Sucursales Sucur = ViewBag.Datos;
+    <div class="sucursal">
+        <h1>La Birra Bar</h1>
+        <img class="foto-bar" src="~/Content/img/@Sucur.Imagen" alt="Alternate Text" style="margin-bottom:5px;" />
+        @Html.Raw(@Sucur.Mapa)
+        <div id="info-sucursales">
+            <p class="info"><i class="fa fa-home" aria-hidden="true"></i>@Sucur.Domicilio</p>
+            <p class="info"><i class="fa fa-phone" aria-hidden="true"></i> @Sucur.Telefono </p>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("Comentario", "LaBirra", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewBag.Invalido == "true")
+    {
+        <p style="color:red;">Los campos estan vacios o los datos que ingreso son invalidos.</p>
+    }
+    @Html.HiddenFor(x => x.idsucursal, new { @idsucursal = ViewBag.Datos.IdSucursal })
+    @Html.Label("Nombre: ") @Html.TextBoxFor(x => x.Nom) @Html.ValidationMessageFor(x => x.Nom)  <br />
+    @Html.Label("Calificacion:")
+    @Html.Label("1") @Html.RadioButtonFor(x => x.calificacion, '1')
+    @Html.Label("2") @Html.RadioButtonFor(x => x.calificacion, '2')
+    @Html.Label("3") @Html.RadioButtonFor(x => x.calificacion, '3')
+    @Html.Label("4") @Html.RadioButtonFor(x => x.calificacion, '4')
+    @Html.Label("5") @Html.RadioButtonFor(x => x.calificacion, '5') <br />
+    @Html.Label("Comentario: ") @Html.TextAreaFor(x => x.com, new { rows = 10, columns = 40 })@Html.ValidationMessageFor(x => x.com)  <br />
+    <input type="submit" value="Enviar" />
+}
+<div id="caja-comentarios">
+    @{
+        if (ViewBag.Comentarios.Count > 0)
+        {
+            foreach (Comentario Com in ViewBag.Comentarios)
+            {
+                <div class="comentarios">
+                    <p>@Com.Nom calificó: <i class="fa fa-star" aria-hidden="true"></i>@Com.calificacion</p>
+                    <p>@Com.com</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="text-align:center;padding:10px;">No hay comentarios</p>
+        }
+
+    }
+</div>
+
